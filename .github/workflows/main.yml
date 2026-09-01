@@ -174,7 +174,7 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER_DOCKER }}
+          username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           # Параметр script передаёт в action appleboy/ssh-action команды,
           # которые нужно выполнить на сервере,
