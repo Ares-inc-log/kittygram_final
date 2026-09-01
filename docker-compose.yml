@@ -21,9 +21,11 @@ services:
     volumes:
       - static:/static
   gateway:
-    build: ./nginx/
-    env_file: .env
-    ports:
-      - 9000:80
-    volumes:
-      - static:/static
+    uses: docker/build-push-action@v4
+    with:
+      context: ./nginx/
+      env_file: .env
+      ports:
+        - 9000:80
+      volumes:
+        - static:/static
