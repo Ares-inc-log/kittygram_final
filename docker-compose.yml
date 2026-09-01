@@ -28,21 +28,22 @@ services:
   step:
     uses: appleboy/ssh-action@v1.0.0
     env:
-      DB_PASSWORD: ${ secrets.POSTGRES_PASSWORD }
-      SECRET_KEY: ${ secrets.SECRET_KEY }
-      DB_HOST: ${ secrets.DB_HOST }
+      DB_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      DB_HOST: ${{ secrets.DB_HOST }}
     with:
-      host: ${ secrets.HOST }
-      username: ${ secrets.USER }
-      key: ${ secrets.SSH_KEY }
+      host: ${{ secrets.HOST }}
+      username: ${{ secrets.USER }}
+      key: ${{ secrets.SSH_KEY }}
       envs: DB_PASSWORD,SECRET_KEY,DB_HOST
       script: |
-        cd /home/ubuntu/kittygram/
+            cd kittygram
 
-        echo "DB_PASSWORD=${POSTGRES_PASSWORD}" > .env
-        echo "SECRET_KEY=${SECRET_KEY}" >> .env
-        echo "DB_HOST=${DB_HOST}" >> .env
+            sudo docker compose -f docker-compose.yml pull
+            sudo docker compose -f docker-compose.yml down
+            sudo docker compose -f docker-compose.yml up -d
 
-        docker compose down
-        docker compose up -d --build
+            sudo docker compose -f docker-compose.yml exec backend python manage.py migrate
+            sudo docker compose -f docker-compose.yml exec backend python manage.py collectstatic
+            sudo docker compose -f docker-compose.yml exec backend cp -r /app/collected_static/. /backend_static/static/
 
