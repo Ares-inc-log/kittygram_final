@@ -27,7 +27,8 @@ services:
       - "443:443"
     volumes:
       - static:/static
-      - /etc/letsencrypt/:/etc/letsencrypt/:ro
+      - /etc/letsencrypt/live/kittysen.duckdns.org/fullchain.pem:/etc/nginx/ssl/fullchain.pem:ro
+      - /etc/letsencrypt/live/kittysen.duckdns.org/privkey.pem:/etc/nginx/ssl/privkey.pem:ro
     depends_on:
       - backend
 
