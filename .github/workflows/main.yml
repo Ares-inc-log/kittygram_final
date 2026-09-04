@@ -146,9 +146,9 @@ jobs:
       - name: Push to DockerHub
         uses: docker/build-push-action@v4
         with:
-          context: ./gateway/
+          context: ./nginx/
           push: true
-          tags: haziko/kittygram_gateway:latest
+          tags: haziko/kittygram_nginx:latest
 
   deploy:
     runs-on: ubuntu-latest
