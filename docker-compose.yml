@@ -18,8 +18,8 @@ services:
     command: cp -r /app/build/. /static/
     volumes:
       - static:/static
-  gateway:
-    image: haziko/kittygram_gateway:latest
+  nginx:
+    image: ./nginx/
     env_file: .env
     ports:
       - 9000:80
