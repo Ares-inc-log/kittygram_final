@@ -188,6 +188,9 @@ jobs:
             echo "SECRET_KEY=${SECRET_KEY}" >> .env
             echo "DB_HOST=${DB_HOST}" >> .env
 
-            # 3. Подтягиваем новые образы и перезапускаем контейнеры
+            # 3. Скачиваем новые версии готовых образов из Docker Hub
+            docker compose pull
+
+            # 4. Подтягиваем новые образы и перезапускаем контейнеры
             docker compose down
-            docker compose up -d --build
+            docker compose up -d
