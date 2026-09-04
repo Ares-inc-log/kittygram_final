@@ -4,22 +4,30 @@ volumes:
 
 services:
   db:
+    networks:
+      - kitty_net
     image: postgres:13
     env_file: .env
     volumes:
       - pg_data:/var/lib/postgresql/data
   backend:
+    networks:
+      - kitty_net
     image: haziko/kittygram_backend:latest
     env_file: .env
     volumes:
       - static:/backend_static
   frontend:
+    networks:
+      - kitty_net
     env_file: .env
     image: haziko/kittygram_frontend:latest
     command: cp -r /app/build/. /static/
     volumes:
       - static:/static
   nginx:
+    networks:
+      - kitty_net
     image: haziko/kittygram_nginx:latest
     env_file: .env
     ports:
@@ -31,5 +39,9 @@ services:
       - /etc/letsencrypt/live/kittysen.duckdns.org/privkey.pem:/etc/nginx/ssl/privkey.pem:ro
     depends_on:
       - backend
+  networks:
+    kitty_net:
+      driver: bridge
+
 
 
