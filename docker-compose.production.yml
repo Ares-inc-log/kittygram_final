@@ -33,7 +33,7 @@ services:
       - "443:443"
     volumes:
       - static:/static
-      - /etc/letsencrypt/:/etc/letsencrypt/:ro
+      - ~/kittygram/certs:/etc/letsencrypt/live/kittysen.duckdns.org:ro
     depends_on:
       - backend
     networks:
