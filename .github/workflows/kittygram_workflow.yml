@@ -180,8 +180,8 @@ jobs:
             # 1. Переходим в папку проекта на сервере
             cd ~/kittygram/
 
-            # 2. Перезаписываем или создаем файл .env из переданных переменных
-            echo "POSTGRES_PASSWORD=${{secrets.POSTGRES_PASSWORD}}" > .env
+            echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" > .env
+            echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
             echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
             echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env
             echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
