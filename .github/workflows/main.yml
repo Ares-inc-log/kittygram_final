@@ -193,4 +193,4 @@ jobs:
 
             # 4. Подтягиваем новые образы и перезапускаем контейнеры
             docker compose down
-            docker compose up -d
+            docker compose up -d --remove-orphans
