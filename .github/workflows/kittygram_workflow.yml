@@ -188,9 +188,6 @@ jobs:
             echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
             echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
 
-            # 3. Скачиваем новые версии готовых образов из Docker Hub
-            docker compose pull
-
-            # 4. Подтягиваем новые образы и перезапускаем контейнеры
-            docker compose down
-            docker compose up -d --remove-orphans
+            docker compose -f docker-compose.production.yml pull
+            docker compose -f docker-compose.production.yml down
+            docker compose -f docker-compose.production.yml up -d --remove-orphans
