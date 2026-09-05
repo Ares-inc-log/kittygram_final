@@ -49,6 +49,3 @@ services:
 networks:
   kitty_net:
     driver: bridge
-
-
-
