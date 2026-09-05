@@ -14,6 +14,7 @@ services:
       - kitty_net
   backend:
     image: haziko/kittygram_backend:latest
+    build: ./backend
     restart: always
     env_file: .env
     volumes:
@@ -26,6 +27,7 @@ services:
   frontend:
     env_file: .env
     image: haziko/kittygram_frontend:latest
+    build: ./frontend
     command: cp -r /app/build/. /static/
     volumes:
       - static:/static
@@ -33,6 +35,7 @@ services:
       - kitty_net
   nginx:
     image: haziko/kittygram_nginx:latest
+    build: ./nginx
     restart: always
     env_file: .env
     ports:
