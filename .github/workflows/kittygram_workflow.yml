@@ -176,6 +176,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
+          debug: true
           script: |
             # 1. Переходим в папку проекта на сервере
             cd ~/kittygram/
