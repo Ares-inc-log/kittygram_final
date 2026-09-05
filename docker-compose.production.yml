@@ -15,6 +15,7 @@ services:
       - pg_data:/var/lib/postgresql/data
     networks:
       - kitty_net
+
   backend:
     image: haziko/kittygram_backend:latest
     restart: always
@@ -26,6 +27,7 @@ services:
       - db
     networks:
       - kitty_net
+
   frontend:
     env_file: .env
     image: haziko/kittygram_frontend:latest
@@ -34,6 +36,7 @@ services:
       - static:/static
     networks:
       - kitty_net
+
   nginx:
     image: haziko/kittygram_nginx:latest
     restart: always
@@ -50,6 +53,8 @@ services:
       - backend
     networks:
       - kitty_net
+      - web
+
 networks:
   kitty_net:
     driver: bridge
