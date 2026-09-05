@@ -2,6 +2,9 @@ volumes:
   pg_data:
   static:
   media:
+  taski_static:
+    external: true
+    name: taski_static_volume
 
 services:
   db:
@@ -42,6 +45,7 @@ services:
       - static:/static
       - media:/media
       - /etc/letsencrypt:/etc/letsencrypt:ro
+      - taski_static:/taski_static:ro
     depends_on:
       - backend
     networks:
@@ -49,3 +53,5 @@ services:
 networks:
   kitty_net:
     driver: bridge
+  web:
+    external: true
