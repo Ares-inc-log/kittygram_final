@@ -195,3 +195,18 @@ jobs:
             sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
             sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
             sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/
+      - name: Send VK Notification
+        env:
+          VK_TOKEN: ${{ secrets.VK_BOT_TOKEN }}
+          USER_ID: ${{ secrets.VK_USER_ID }}
+        run: |
+          # Формируем текст сообщения (можно использовать переменные GitHub)
+          MESSAGE="🚀 Сайт задеплоин!%0AРепозиторий: ${{ github.repository }}%0AКоммит: ${{ github.sha }}"
+
+          # Отправляем запрос в API ВКонтакте
+          curl -X POST "https://vk.com" \
+            -d "v=5.131" \
+            -d "access_token=$VK_TOKEN" \
+            -d "user_id=$USER_ID" \
+            -d "random_id=${{ github.run_id }}" \
+            -d "message=$MESSAGE"
