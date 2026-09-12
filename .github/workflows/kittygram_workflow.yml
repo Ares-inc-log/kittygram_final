@@ -207,8 +207,9 @@ jobs:
 
           # Отправляем запрос в API ВКонтакте
           curl -X POST "https://api.vk.com/method/messages.send" \
-            -d "v=5.131" \
-            -d "access_token=$VK_TOKEN" \
-            -d "user_id=$USER_ID" \
-            -d "random_id=${{ github.run_id }}" \
-            -d "message=$MESSAGE"
+          -d "v=5.131" \
+          -d "access_token=$VK_TOKEN" \
+          -d "user_id=$USER_ID" \
+          -d "group_id=239244542" \
+          -d "random_id=${{ github.run_id }}" \
+          -d "message=$MESSAGE"
